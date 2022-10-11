@@ -37,4 +37,4 @@ jobs:
         with:
           push: true
           tags: mpigelati/rupdate:v$BUILD_NUMBER
-          run: echo "mpigelati/rupdate:v$BUILD_NUMBER"
+          run: echo "mpigelati/rupdate:latest$BUILD_NUMBER"
