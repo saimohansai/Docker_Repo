@@ -12,6 +12,29 @@ jobs:
       with:
         token: ${{secrets.github_token}}        
     - name: Print new build number
-      run: echo "Build number is  "V"+$BUILD_NUMBER"
+      run: echo "Build number is  $BUILD_NUMBER"
       # Or, if you're on Windows: echo "Build number is ${env:BUILD_NUMBER}"
       #  echo "Build number is ${env:BUILD_NUMBER}
+#jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      #-
+#         name: Build and push
+#         uses: docker/build-push-action@v3
+#         with:
+#           push: true
+#           tags: mpigelati/rupdate:latest
+          run: echo "mpigelati/rupdate:v$BUILD_NUMBER"
