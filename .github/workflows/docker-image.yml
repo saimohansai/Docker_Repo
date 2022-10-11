@@ -36,5 +36,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: mpigelati/rupdate:v19
+          tags: mpigelati/rupdate:$BUILD_NUMBER
+          #tags: mpigelati/rupdate:v19
           #run: echo "mpigelati/rupdate:latest$BUILD_NUMBER"
