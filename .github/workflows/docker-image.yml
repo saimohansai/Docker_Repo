@@ -1,29 +1,15 @@
-name: ci
-
-on:
-  push:
-    branches:
-      - 'master'
-
 jobs:
-  docker:
+  build:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      -
-        name: Login to DockerHub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      -
-        name: Build and push
-        uses: docker/build-push-action@v3
-        with:
-          push: true
-          tags: mpigelati/rupdate:latest
+    - name: Generate build number
+      id: buildnumber
+      uses: einaregilsson/build-number@v3 
+      with:
+        token: ${{secrets.github_token}}        
+    
+    # Now you can pass ${{ steps.buildnumber.outputs.build_number }} to the next steps.
+    - name: Another step as an example
+      uses: actions/hello-world-docker-action@v1
+      with:
+        who-to-greet: ${{ steps.buildnumber.outputs.build_number }}
